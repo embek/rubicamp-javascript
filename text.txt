@@ -1,0 +1,13 @@
+Rubis-MBP: tebak-kata rubihenjaya$ node solution.js
+Selamat datang di permainan Tebak Kata, silahkan isi dengan jawaban yang benar ya!
+Pertanyaan: Siapakah presiden kita saat ini?
+Tebakan: Jokowi
+Selamat Anda Benar!
+Pertanyaan: Tahun berapa Indonesia merdeka? Tebakan: 1944
+Wkwkwkwk, Anda kurang beruntung!
+Tebakan: 1945
+Selamat Anda Benar!
+Pertanyaan: Sebutkan kota yang memiliki julukan kota Intan?
+Tebakan: garut
+Selamat Anda Benar!
+Hore Anda Menang!
