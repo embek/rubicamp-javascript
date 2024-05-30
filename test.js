@@ -1,3 +1,3 @@
-const { argv } = require('node:process');
+a='qwertyuiodfsgdafghdfsfs';
 
-console.log(argv[2]);
+console.log(a.slice(-1)[0]);
