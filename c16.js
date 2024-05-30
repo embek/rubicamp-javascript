@@ -56,7 +56,7 @@ class CarFactory {
     }
 
     print(index) {
-        console.log(`no. ${parseInt(index)+1}`);
+        console.log(`no. ${parseInt(index) + 1}`);
         console.log(`varian     : ${this.cars[index].varian}`);
         console.log(`sn         : ${this.cars[index].sn}`);
         console.log(`door       : ${this.cars[index].door}`);
