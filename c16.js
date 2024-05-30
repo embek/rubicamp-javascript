@@ -45,32 +45,29 @@ function randomCar(year) {
     return car.slice(-1)[0];
 }
 
-
-
-console.log(randomSn(), tyre);
-
 class CarFactory {
     constructor() {
         this.cars = [];
     }
     produce(year) {
         let produksiTotal = this.cars.length;
-        let produksiBaru = randomInt(3,10);
+        let produksiBaru = randomInt(3, 10);
         for (let i = produksiTotal; i < produksiTotal + produksiBaru; i++) this.cars.push(randomCar(year));
     }
 
     print(index) {
-        console.log(`no. ${index}`);
-        console.log(`varian : ${this.cars[index].varian}`);
-        console.log(`sn : ${this.cars[index].sn}`);
-        console.log(`door : ${this.cars[index].door}`);
-        console.log(`seat : ${this.cars[index].seat} seater`);
-        console.log(`tyre : ${this.cars[index].tyre.brand} ${this.cars[index].tyre.size} inch`);
-        console.log(`year : ${this.cars[index].year}`);
-        console.log(`warranty : ${this.cars[index].warranty} year${this.cars[index].warranty > 1 ? 's' : ''}\n`);
+        console.log(`no. ${parseInt(index)+1}`);
+        console.log(`varian     : ${this.cars[index].varian}`);
+        console.log(`sn         : ${this.cars[index].sn}`);
+        console.log(`door       : ${this.cars[index].door}`);
+        console.log(`seat       : ${this.cars[index].seat} seater`);
+        console.log(`tyre       : ${this.cars[index].tyre.brand} ${this.cars[index].tyre.size} inch`);
+        console.log(`year       : ${this.cars[index].year}`);
+        console.log(`warranty   : ${this.cars[index].warranty} year${this.cars[index].warranty > 1 ? 's' : ''}\n`);
     }
 
     result() {
+        console.log(`hasil produksi :\n`)
         for (let x in this.cars) {
             this.print(x);
         }
@@ -80,7 +77,7 @@ class CarFactory {
         console.log(`hasil simulasi garansi semua mobil pada tahun ${simulationYear}:\n`)
         for (let x in this.cars) {
             this.print(x);
-            console.log(`status on ${simulationYear} : this guarantee status is ${(simulationYear-this.cars[x].year)>this.cars[x].warranty?'expired':'active'} \n`)
+            console.log(`status on ${simulationYear} : this guarantee status is ${(simulationYear - this.cars[x].year) > this.cars[x].warranty ? 'expired' : 'active'} \n`)
         }
 
     }
@@ -92,4 +89,4 @@ const toyota = new CarFactory()
 toyota.produce(2020)
 toyota.produce(2022)
 toyota.result()
-toyota.guaranteeSimulation(2024)
+toyota.guaranteeSimulation(2025)
