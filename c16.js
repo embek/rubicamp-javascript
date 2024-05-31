@@ -5,15 +5,12 @@ class Tyre {
     }
 }
 
-const dunlop = new Tyre('Dunlop', 15);
-const bridgestone = new Tyre('Bridgestone', 17)
-
 class Car {
-    constructor(varian, door, seat, tyre) {
+    constructor(varian) {
         this.varian = varian;
-        this.door = door;
-        this.seat = seat;
-        this.tyre = tyre;
+        this.door;
+        this.seat;
+        this.tyre;
         this.sn;
         this.warranty;
         this.year;
@@ -21,18 +18,28 @@ class Car {
 }
 
 class Agya extends Car {
-
+    constructor(varian) {
+        super(varian);
+        this.door = 5;
+        this.seat = 5;
+        this.tyre = new Tyre('Dunlop', 15);
+    }
 }
 
 class Rush extends Car {
-
+    constructor(varian) {
+        super(varian);
+        this.door = 5;
+        this.seat = 5;
+        this.tyre = new Tyre('Bridgestone', 17);
+    }
 }
 
 class CarFactory {
     constructor() {
         this.cars = [];
-        this.cars.push(new Agya('Agya', 5, 5, dunlop));
-        this.cars.push(new Rush('Rush', 5, 5, bridgestone));
+        this.cars.push(new Agya('Agya'));
+        this.cars.push(new Rush('Rush'));
     }
 
     randomInt(min, max) {
@@ -41,7 +48,7 @@ class CarFactory {
 
     randomHex(panjang) {
         let hasil = '';
-        let asal = 'a0b19c82d37e64f5';
+        let asal = 'a0b194c82d2737e6941f5';
         for (let i = 0; i < panjang; i++) {
             hasil = hasil + asal[this.randomInt(0, asal.length - 1)]
         }
@@ -53,10 +60,14 @@ class CarFactory {
     randomCar(year) {
         let sembarang = this.randomInt(0, this.cars.length - 1);
         // console.log(this.cars.length, sembarang);
-        this.cars.push(new Car(this.cars[sembarang].varian, this.cars[sembarang].door, this.cars[sembarang].seat, this.cars[sembarang].tyre));
+        this.cars.push(new Car(this.cars[sembarang].varian));
+        this.cars[this.cars.length - 1].door = this.cars[sembarang].door;
+        this.cars[this.cars.length - 1].seat = this.cars[sembarang].seat;
+        this.cars[this.cars.length - 1].tyre = this.cars[sembarang].tyre;
         this.cars[this.cars.length - 1].year = year;
         this.cars[this.cars.length - 1].sn = this.randomSn();
         this.cars[this.cars.length - 1].warranty = this.randomInt(1, 5);
+        // console.log(`------------------\n${JSON.stringify(this.cars[this.cars.length - 1])}`);
     }
 
     produce(year) {
@@ -66,7 +77,7 @@ class CarFactory {
     }
 
     print(index) {
-        console.log(`no. ${parseInt(index) + 1}`);
+        console.log(`no. ${parseInt(index) - 1}`);
         console.log(`varian     : ${this.cars[index].varian}`);
         console.log(`sn         : ${this.cars[index].sn}`);
         console.log(`door       : ${this.cars[index].door}`);
@@ -78,23 +89,23 @@ class CarFactory {
 
     result() {
         console.log(`hasil produksi :\n`)
-        for (let x in this.cars) {
-            this.print(x);
+        for (let i = 2; i < this.cars.length; i++) {
+            this.print(i);
         }
     }
 
     guaranteeSimulation(simulationYear) {
-        console.log(`hasil simulasi garansi semua mobil pada tahun ${simulationYear}:\n`)
-        for (let x in this.cars) {
-            this.print(x);
-            console.log(`status on ${simulationYear} : this guarantee status is ${(simulationYear - this.cars[x].year) > this.cars[x].warranty ? 'expired' : 'active'} \n`)
+        console.log(`hasil simulasi garansi semua mobil pada tahun ${simulationYear}:\n`);
+        for (let i = 2; i < this.cars.length; i++) {
+            this.print(i);
+            console.log(`status on ${simulationYear} : this guarantee status is ${(simulationYear - this.cars[i].year) > this.cars[i].warranty ? 'expired' : 'active'} \n`);
         }
 
     }
 }
 
 
-const toyota = new CarFactory();
+const toyota = new CarFactory()
 toyota.produce(2020)
 toyota.produce(2022)
 toyota.result()
