@@ -5,16 +5,8 @@ class Tyre {
     }
 }
 
-class Dunlop extends Tyre {
-
-}
-
-class Bridgestone extends Tyre {
-
-}
-
-const dunlop = new Dunlop('Dunlop', 15);
-const bridgestone = new Bridgestone('Bridgestone', 17)
+const dunlop = new Tyre('Dunlop', 15);
+const bridgestone = new Tyre('Bridgestone', 17)
 
 class Car {
     constructor(varian, door, seat, tyre) {
@@ -36,13 +28,11 @@ class Rush extends Car {
 
 }
 
-const agya = new Agya('Agya', 5, 5, dunlop);
-const rush = new Rush('Rush', 5, 5, bridgestone);
-
 class CarFactory {
     constructor() {
         this.cars = [];
-        this.templateCar();
+        this.cars.push(new Agya('Agya', 5, 5, dunlop));
+        this.cars.push(new Rush('Rush', 5, 5, bridgestone));
     }
 
     randomInt(min, max) {
@@ -59,11 +49,6 @@ class CarFactory {
     }
 
     randomSn = () => this.randomHex(8) + '-' + this.randomHex(4) + '-' + this.randomHex(4) + '-' + this.randomHex(4) + '-' + this.randomHex(12);
-
-    templateCar() {
-        this.cars.push(agya);
-        this.cars.push(rush);
-    }
 
     randomCar(year) {
         let sembarang = this.randomInt(0, this.cars.length - 1);
