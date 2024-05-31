@@ -1,26 +1,20 @@
-function randomInt(min, max) {
-    return min + Math.floor(Math.random() * (max - min));
-}
-function randomHex(panjang) {
-    hasil = '';
-    asal = 'a0b19c82d37e64f5';
-    for (let i = 0; i < panjang; i++) {
-        hasil = hasil + asal[randomInt(0, asal.length - 1)]
-    }
-    return hasil;
-}
-
-const randomSn = () => randomHex(8) + '-' + randomHex(4) + '-' + randomHex(4) + '-' + randomHex(4) + '-' + randomHex(12);
-
 class Tyre {
     constructor(brand, size) {
         this.brand = brand;
         this.size = size;
     }
 }
-const tyre = [];
-tyre.push(new Tyre('Dunlop', 15));
-tyre.push(new Tyre('Bridgestone', 17));
+
+class Dunlop extends Tyre {
+
+}
+
+class Bridgestone extends Tyre {
+
+}
+
+const dunlop = new Dunlop('Dunlop', 15);
+const bridgestone = new Bridgestone('Bridgestone', 17)
 
 class Car {
     constructor(varian, door, seat, tyre) {
@@ -28,31 +22,62 @@ class Car {
         this.door = door;
         this.seat = seat;
         this.tyre = tyre;
-        this.sn = randomSn();
-        this.warranty = randomInt(1, 5);
+        this.sn;
+        this.warranty;
         this.year;
     }
 }
 
-const car = [];
-car.push(new Car('Agya', 5, 5, tyre[0]));
-car.push(new Car('Rush', 5, 5, tyre[1]));
+class Agya extends Car {
 
-function randomCar(year) {
-    sembarang = randomInt(0, car.length - 1);
-    car.push(new Car(car[sembarang].varian, car[sembarang].door, car[sembarang].seat, car[sembarang].tyre));
-    car[car.length - 1].year = year;
-    return car.slice(-1)[0];
 }
+
+class Rush extends Car {
+
+}
+
+const agya = new Agya('Agya', 5, 5, dunlop);
+const rush = new Rush('Rush', 5, 5, bridgestone);
 
 class CarFactory {
     constructor() {
         this.cars = [];
+        this.templateCar();
     }
+
+    randomInt(min, max) {
+        return min + Math.floor(Math.random() * (max - min));
+    }
+
+    randomHex(panjang) {
+        let hasil = '';
+        let asal = 'a0b19c82d37e64f5';
+        for (let i = 0; i < panjang; i++) {
+            hasil = hasil + asal[this.randomInt(0, asal.length - 1)]
+        }
+        return hasil;
+    }
+
+    randomSn = () => this.randomHex(8) + '-' + this.randomHex(4) + '-' + this.randomHex(4) + '-' + this.randomHex(4) + '-' + this.randomHex(12);
+
+    templateCar() {
+        this.cars.push(agya);
+        this.cars.push(rush);
+    }
+
+    randomCar(year) {
+        let sembarang = this.randomInt(0, this.cars.length - 1);
+        // console.log(this.cars.length, sembarang);
+        this.cars.push(new Car(this.cars[sembarang].varian, this.cars[sembarang].door, this.cars[sembarang].seat, this.cars[sembarang].tyre));
+        this.cars[this.cars.length - 1].year = year;
+        this.cars[this.cars.length - 1].sn = this.randomSn();
+        this.cars[this.cars.length - 1].warranty = this.randomInt(1, 5);
+    }
+
     produce(year) {
         let produksiTotal = this.cars.length;
-        let produksiBaru = randomInt(3, 10);
-        for (let i = produksiTotal; i < produksiTotal + produksiBaru; i++) this.cars.push(randomCar(year));
+        let produksiBaru = this.randomInt(5, 10);
+        for (let i = produksiTotal; i < produksiTotal + produksiBaru; i++) this.randomCar(year);
     }
 
     print(index) {
@@ -84,8 +109,7 @@ class CarFactory {
 }
 
 
-
-const toyota = new CarFactory()
+const toyota = new CarFactory();
 toyota.produce(2020)
 toyota.produce(2022)
 toyota.result()
