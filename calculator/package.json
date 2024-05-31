@@ -1,0 +1,17 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "fungsi fungsi dalam kalkulator",
+  "main": "Calculator.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "import",
+    "es6"
+  ],
+  "author": "Adzka",
+  "license": "ISC"
+}
